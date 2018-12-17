@@ -1,11 +1,22 @@
 package com.company;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class KMeans {
+public class KMeans extends JFrame {
 
     private static final int M = 4;
 
@@ -49,11 +60,18 @@ public class KMeans {
                     System.out.println("\nNew cluster center: " + centerPoints.get(clusters.indexOf(cluster)).toString());
                 }
 
-                for (ArrayList<Point> cluster : clusters) {
-                    cluster.clear();
+                if (i != 4) {
+                    for (ArrayList<Point> cluster : clusters) {
+                        cluster.clear();
+                    }
                 }
             }
 
+            KMeans example = new KMeans("Scatter Chart Example");
+            example.setSize(800, 400);
+            example.setLocationRelativeTo(null);
+            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            example.setVisible(true);
 
         } else {
             System.out.println("You need to provide a txt file with points!");
@@ -89,6 +107,54 @@ public class KMeans {
             indexes.add(index);
             centerPoints.add(points.get(index));
         }
+    }
+
+    private XYDataset createDataset() {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+
+        XYSeries series = new XYSeries("Centers");
+
+        for (Point point : centerPoints) {
+            series.add(point.getX(), point.getY());
+        }
+
+        dataset.addSeries(series);
+
+        int i=0;
+        for (ArrayList<Point> cluster : clusters) {
+            series = new XYSeries("Cluster " + i);
+            for (Point point : cluster) {
+                series.add(point.getX(), point.getY());
+            }
+            i++;
+            dataset.addSeries(series);
+        }
+
+        return dataset;
+    }
+
+    public KMeans(String title) {
+        super(title);
+
+        // Create dataset
+        XYDataset dataset = createDataset();
+
+        // Create chart
+        JFreeChart chart = ChartFactory.createScatterPlot("All the points",
+                "X-Axis",
+                "Y-Axis",
+                dataset, PlotOrientation.HORIZONTAL,
+                true, true, false);
+
+
+        //Changes background color
+        XYPlot plot = (XYPlot)chart.getPlot();
+        plot.setBackgroundPaint(new Color(255,228,196));
+
+
+        // Create Panel
+        ChartPanel panel = new ChartPanel(chart);
+        setContentPane(panel);
     }
 
 }
