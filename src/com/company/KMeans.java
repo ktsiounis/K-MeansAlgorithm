@@ -24,6 +24,10 @@ public class KMeans extends JFrame {
     private static ArrayList<ArrayList<Point>> clusters = new ArrayList<>();
     private static ArrayList<Point> centerPoints = new ArrayList<>();
     private static Random randomGenerator = new Random();
+    private static boolean flag = true;
+    private static ArrayList<ArrayList<Double>> previousDistances = new ArrayList<>();
+    private static ArrayList<ArrayList<Double>> pointFromCenterDistances = new ArrayList<>();
+    private static ArrayList<Double> totalDispersions = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -35,36 +39,76 @@ public class KMeans extends JFrame {
             initializeData();
 
             for (int i = 0; i<5; i++ ) {
-                for (Point point : points) {
-                    ArrayList<Double> distancesFromCenters = new ArrayList<>();
-                    for (Point centerPoint : centerPoints) {
-                        double distanceFromCluster = Math.sqrt(Math.pow((point.getX() - centerPoint.getX()), 2) + Math.pow((point.getY() - centerPoint.getY()), 2));
-                        distancesFromCenters.add(distanceFromCluster);
+                pointFromCenterDistances = new ArrayList<>();
+                for (int m = 0; m<M; m++) {
+                    ArrayList<Double> distances = new ArrayList<>();
+                    pointFromCenterDistances.add(distances);
+                }
+                previousDistances = pointFromCenterDistances;
+                do {
+                    for (Point point : points) {
+                        ArrayList<Double> distancesFromCenters = new ArrayList<>();
+                        for (Point centerPoint : centerPoints) {
+                            double distanceFromCluster = Math.sqrt(Math.pow((point.getX() - centerPoint.getX()), 2) + Math.pow((point.getY() - centerPoint.getY()), 2));
+                            distancesFromCenters.add(distanceFromCluster);
+                        }
+
+                        clusters.get(distancesFromCenters.indexOf(Collections.min(distancesFromCenters))).add(point);
+                        pointFromCenterDistances.get(distancesFromCenters.indexOf(Collections.min(distancesFromCenters))).add(Collections.min(distancesFromCenters));
+
                     }
 
-                    clusters.get(distancesFromCenters.indexOf(Collections.min(distancesFromCenters))).add(point);
-
-                }
-
-                for (ArrayList<Point> cluster : clusters) {
-                    System.out.println("\nCluster " + clusters.indexOf(cluster) + ": Center " + centerPoints.get(clusters.indexOf(cluster)).toString());
-                    double sumX = 0;
-                    double sumY = 0;
-                    for (Point point : cluster) {
-                        System.out.print(point.toString() + " ");
-                        sumX += point.getX();
-                        sumY += point.getY();
-                    }
-                    System.out.println(sumX);
-                    centerPoints.set(clusters.indexOf(cluster), new Point(Math.round(sumX / cluster.size()), Math.round(sumY / cluster.size())));
-                    System.out.println("\nNew cluster center: " + centerPoints.get(clusters.indexOf(cluster)).toString());
-                }
-
-                if (i != 4) {
                     for (ArrayList<Point> cluster : clusters) {
-                        cluster.clear();
+                        System.out.println("\nCluster " + clusters.indexOf(cluster) + ": Center " + centerPoints.get(clusters.indexOf(cluster)).toString());
+                        double sumX = 0;
+                        double sumY = 0;
+                        for (Point point : cluster) {
+                            System.out.print(point.toString() + " ");
+                            sumX += point.getX();
+                            sumY += point.getY();
+                        }
+                        System.out.println(sumX);
+                        centerPoints.set(clusters.indexOf(cluster), new Point(Math.round(sumX / cluster.size()), Math.round(sumY / cluster.size())));
+                        System.out.println("\nNew cluster center: " + centerPoints.get(clusters.indexOf(cluster)).toString());
                     }
+
+                    for (int k=0; k<pointFromCenterDistances.size(); k++) {
+                        for (int l=0; l<pointFromCenterDistances.get(k).size(); l++) {
+                            if (previousDistances.get(k).get(l).equals(pointFromCenterDistances.get(k).get(l))) {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (!flag) {
+                            break;
+                        }
+                    }
+
+                    if (flag) {
+                        previousDistances = pointFromCenterDistances;
+                    }
+
+                    if (i != 4) {
+                        for (ArrayList<Point> cluster : clusters) {
+                            cluster.clear();
+                        }
+                    }
+                } while (flag);
+                flag = true;
+
+                double totalDispersion = 0;
+                for (int j=0; j<clusters.size(); j++) {
+                    double sum = 0;
+                    for (Double clusterDistances : pointFromCenterDistances.get(j)) {
+                        sum += clusterDistances;
+                    }
+                    totalDispersion += sum;
                 }
+                totalDispersions.add(totalDispersion);
+            }
+
+            for (Double totalDispersion : totalDispersions) {
+                System.out.println(totalDispersion);
             }
 
             KMeans example = new KMeans("Scatter Chart Example");

@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1029044e-b265-45f9-9ddc-5573a40704d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jcommon_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jfreechart_1_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jcommon-1.0.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jfreechart-1.0.1.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K-MeansAlgorithm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/K-MeansAlgorithm.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/K-MeansAlgorithm/com/company/KMeans.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/K-MeansAlgorithm/com/company/KMeans.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/KMeans.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/KMeans.java" afterDir="false" />
     </list>
@@ -79,18 +74,33 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-542316190">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.19" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="783" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/KMeans.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="54" column="45" lean-forward="true" selection-start-line="54" selection-start-column="45" selection-end-line="54" selection-end-column="45" />
+            <state relative-caret-position="289">
+              <caret line="106" column="54" selection-start-line="106" selection-start-column="54" selection-end-line="106" selection-end-column="54" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="method#readPointsFromFile#0;class#KMeans#0" />
-                <element signature="method#initializeData#0;class#KMeans#0" />
+                <element signature="method#createDataset#0;class#KMeans#0" />
+                <element signature="method#KMeans#0;class#KMeans#0" />
               </folding>
             </state>
           </provider>
@@ -143,10 +153,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="822" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -172,10 +181,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="company" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="K-MeansAlgorithm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -186,7 +191,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545078992107" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545155915607" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/jcommon-1.0.0.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -241,17 +246,19 @@
       <workItem from="1544965608241" duration="2131000" />
       <workItem from="1545074863413" duration="3140000" />
       <workItem from="1545079073152" duration="1289000" />
+      <workItem from="1545150514524" duration="4854000" />
+      <workItem from="1545162312336" duration="2238000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17357000" />
+    <option name="totallyTimeSpent" value="24449000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="822" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14520743" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -260,7 +267,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37555066" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37535015" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -292,12 +299,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/company/KMeans.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="54" column="45" lean-forward="true" selection-start-line="54" selection-start-column="45" selection-end-line="54" selection-end-column="45" />
+        <state relative-caret-position="289">
+          <caret line="106" column="54" selection-start-line="106" selection-start-column="54" selection-end-line="106" selection-end-column="54" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#readPointsFromFile#0;class#KMeans#0" />
-            <element signature="method#initializeData#0;class#KMeans#0" />
+            <element signature="method#createDataset#0;class#KMeans#0" />
+            <element signature="method#KMeans#0;class#KMeans#0" />
           </folding>
         </state>
       </provider>
