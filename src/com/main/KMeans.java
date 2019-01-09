@@ -1,4 +1,4 @@
-package com.company;
+package com.main;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -18,11 +18,11 @@ import java.util.Random;
 
 public class KMeans extends JFrame {
 
-    private static final int M = 4;
+    private static final int M = 3;
 
-    private static ArrayList<Point> points = new ArrayList<>();
-    private static ArrayList<ArrayList<Point>> clusters = new ArrayList<>();
-    private static ArrayList<Point> centerPoints = new ArrayList<>();
+    private static ArrayList<com.main.Point> points = new ArrayList<>();
+    private static ArrayList<ArrayList<com.main.Point>> clusters = new ArrayList<>();
+    private static ArrayList<com.main.Point> centerPoints = new ArrayList<>();
     private static Random randomGenerator = new Random();
     private static boolean flag = true;
     private static ArrayList<ArrayList<Double>> previousDistances = new ArrayList<>();
@@ -46,9 +46,9 @@ public class KMeans extends JFrame {
                 }
                 previousDistances = pointFromCenterDistances;
                 do {
-                    for (Point point : points) {
+                    for (com.main.Point point : points) {
                         ArrayList<Double> distancesFromCenters = new ArrayList<>();
-                        for (Point centerPoint : centerPoints) {
+                        for (com.main.Point centerPoint : centerPoints) {
                             double distanceFromCluster = Math.sqrt(Math.pow((point.getX() - centerPoint.getX()), 2) + Math.pow((point.getY() - centerPoint.getY()), 2));
                             distancesFromCenters.add(distanceFromCluster);
                         }
@@ -58,17 +58,17 @@ public class KMeans extends JFrame {
 
                     }
 
-                    for (ArrayList<Point> cluster : clusters) {
+                    for (ArrayList<com.main.Point> cluster : clusters) {
                         System.out.println("\nCluster " + clusters.indexOf(cluster) + ": Center " + centerPoints.get(clusters.indexOf(cluster)).toString());
                         double sumX = 0;
                         double sumY = 0;
-                        for (Point point : cluster) {
+                        for (com.main.Point point : cluster) {
                             System.out.print(point.toString() + " ");
                             sumX += point.getX();
                             sumY += point.getY();
                         }
                         System.out.println(sumX);
-                        centerPoints.set(clusters.indexOf(cluster), new Point(Math.round(sumX / cluster.size()), Math.round(sumY / cluster.size())));
+                        centerPoints.set(clusters.indexOf(cluster), new com.main.Point(sumX / cluster.size(), sumY / cluster.size()));
                         System.out.println("\nNew cluster center: " + centerPoints.get(clusters.indexOf(cluster)).toString());
                     }
 
@@ -89,7 +89,7 @@ public class KMeans extends JFrame {
                     }
 
                     if (i != 4) {
-                        for (ArrayList<Point> cluster : clusters) {
+                        for (ArrayList<com.main.Point> cluster : clusters) {
                             cluster.clear();
                         }
                     }
@@ -130,7 +130,7 @@ public class KMeans extends JFrame {
             while ((sCurrentLine = bufferedReader.readLine()) != null) {
                 sCurrentLine = sCurrentLine.replace("(", "");
                 sCurrentLine = sCurrentLine.replace(")", "");
-                Point point = new Point(Double.valueOf(sCurrentLine.split(",")[0]), Double.valueOf(sCurrentLine.split(",")[1]));
+                com.main.Point point = new com.main.Point(Double.valueOf(sCurrentLine.split(",")[0]), Double.valueOf(sCurrentLine.split(",")[1]));
                 points.add(point);
             }
         } catch (IOException e) {
@@ -142,7 +142,7 @@ public class KMeans extends JFrame {
         ArrayList<Integer> indexes = new ArrayList<>();
         int index;
         for (int i = 0; i<M; i++) {
-            ArrayList<Point> cluster = new ArrayList<>();
+            ArrayList<com.main.Point> cluster = new ArrayList<>();
             clusters.add(cluster);
             index = randomGenerator.nextInt(points.size());
             while (indexes.contains(index)) {
@@ -151,6 +151,7 @@ public class KMeans extends JFrame {
             indexes.add(index);
             centerPoints.add(points.get(index));
         }
+
     }
 
     private XYDataset createDataset() {
@@ -158,14 +159,14 @@ public class KMeans extends JFrame {
 
         XYSeries series = new XYSeries("Centers");
 
-        for (Point point : centerPoints) {
+        for (com.main.Point point : centerPoints) {
             series.add(point.getX(), point.getY());
         }
 
         dataset.addSeries(series);
 
         int i=0;
-        for (ArrayList<Point> cluster : clusters) {
+        for (ArrayList<com.main.Point> cluster : clusters) {
             series = new XYSeries("Cluster " + i);
             for (Point point : cluster) {
                 series.add(point.getX(), point.getY());
